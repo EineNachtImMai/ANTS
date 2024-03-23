@@ -4,36 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css" />
-    <title>Simple Text Editor</title>
-    <!-- <script src="font.js"></script> -->
+    <title>ANTS</title>
+    <script src="newparagraph.js"></script>
 </head>
 <body>
     <input type="file" id="fileInput">
     <button id="openButton">Open File</button>
 
-    <textarea id="editor" rows="20" cols="130"></textarea>
+    <!-- <textarea id="editor"></textarea> -->
+    <div id="paragraphs">
+      <p contenteditable="true" id="p1"></p>
+    </div>
 
-    <script>
-        const editor = document.getElementById('editor');
-        const fileInput = document.getElementById('fileInput');
-        const openButton = document.getElementById('openButton');
-
-        openButton.addEventListener('click', () => {
-          fileInput.click();
-        });
-
-        fileInput.addEventListener('change', (event) => {
-            const file = event.target.files[0];
-            const reader = new FileReader();
-            
-            reader.onload = () => {
-                const contents = reader.result;
-                editor.value = contents; 
-            };
-
-            reader.readAsText(file);
-        });
-    </script>
+    
 </body>
 </html>
 

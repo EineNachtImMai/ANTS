@@ -7,23 +7,39 @@
 * {
   font-family: 'JetBrains Mono Nerd Font';
   font-size: 14px;
+  color: #cdd6f4;
 
   background-color: rgba(30, 30, 46, 1.0);
   /* user-css: https://mshaugh.github.io/nerdfont-webfonts/build/firacode-nerd-font.css; */
+}
+
+input[type="file"] {
+  display: none;
 }
 
 button {
   border-radius: 16px;
   border-color: rgba(0, 0, 0, 1.0) rgba(0, 0, 0, 1.0);
   border-style: solid;
+  margin: 10px;
 }
 
-textarea {
-  border: 0px;
-  width: 100%;
-  resize: none;
-}
+/* textarea { */
+/*   border: 0px; */
+/*   width: 100%; */
+/*   height: auto; */
+/*   overflow-y: visible; */
+/*   resize: none; */
+/* } */
 
-textarea:hover {
+p[contenteditable="true"]:hover {
   background-color: rgba(35, 35, 52, 1.0)
+}
+
+p[contenteditable="true"]:focus {
+  background-color: rgba(35, 35, 52, 1.0)
+}
+
+:focus {
+  outline: 0;
 }
