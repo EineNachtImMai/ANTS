@@ -3,86 +3,41 @@ let paragraphCounter = 2;
 
 const container = document.getElementById("paragraphs");
 
-// Add event listener for keydown event
+// Place the cursor at the end of the paragraph
+function moveCursorToEnd(paragraph) {
+    // Create a new Range object
+    const range = document.createRange();
+    
+    // Set the range to the end of the paragraph
+    range.selectNodeContents(paragraph);
+    range.collapse(false); // Collapse the range to the end
+    
+    // Create a new Selection object and set the range
+    const selection = window.getSelection();
+    selection.removeAllRanges(); // Clear any existing selection
+    selection.addRange(range); // Set the new range
+}
 
-// document.addEventListener('keydown', function(event) {
-//     // Check if the pressed keys are Shift + Enter
-//     if (event.shiftKey && event.key === 'Enter') {
-//         // Increment the paragraph counter
-//         paragraphCounter++;
-
-//         // Create a new paragraph element
-//         const newParagraph = document.createElement('div');
-
-//         // Set the ID of the new paragraph using the counter value
-//         newParagraph.id = 'p' + paragraphCounter;
-
-//         // Set the contenteditable attribute to true
-//         newParagraph.contentEditable = true;
-
-//         newParagraph.innerHTML = "a";
-
-//         // Append the new paragraph to the document body
-//         container.appendChild(newParagraph);
-
-//         // Focus on the newly created paragraph for user input
-//         newParagraph.focus();
-
-//         // Select all text in the newly created paragraph
-//         const range = document.createRange();
-//         range.selectNodeContents(newParagraph);
-//         const selection = window.getSelection();
-//         selection.removeAllRanges();
-//         selection.addRange(range);
-
-//         // Prevent the default behavior of the Shift + Enter key combination
-//         event.preventDefault();
-//     }
-// });
-
-
-// let active = document.activeElement
-
-// active.onkeypress = function (evt) {
-//     if (evt.keyCode == 13 && active.nodeName=="DIV") {
-//         // Shift + enter pressed
-//         evt.preventDefault()
-//         evt.stopPropagation() // Stop default handling
-
-//         // Simulate enter is pressed
-//         active.innerHTML += "<br>";
-//     }
-// }
-// Add event listener for keydown event
 document.addEventListener('keydown', function(event) {
-    // Check if the pressed keys are Shift + Enter
     if (event.shiftKey && event.key === 'Enter') {
-        // Increment the paragraph counter
         paragraphCounter++;
 
-        // Create a new paragraph element
         const newParagraph = document.createElement('p');
 
-        // Set the ID of the new paragraph using the counter value
         newParagraph.id = 'p' + paragraphCounter;
 
-        // Set the contenteditable attribute to true
         newParagraph.contentEditable = true;
 
-        // Append the new paragraph to the document body
         document.getElementById("paragraphs").appendChild(newParagraph);
 
-        // Focus on the newly created paragraph for user input
         newParagraph.focus();
 
-        // Select all text in the newly created paragraph
         const range = document.createRange();
         range.selectNodeContents(newParagraph);
         const selection = window.getSelection();
         selection.removeAllRanges();
         selection.addRange(range);
 
-        // Prevent the default behavior of the Shift + Enter key combination
         event.preventDefault();
     }
   else if (event.key === 'Enter') {
@@ -98,6 +53,14 @@ document.addEventListener('keydown', function(event) {
       selection.addRange(range);
       event.preventDefault();
     }
+  }
+  else if (event.key == "Backspace" && document.activeElement.textContent === "") {
+    const prev = document.activeElement.previousSibling;
+    document.activeElement.remove();
+    prev.focus();
+    moveCursorToEnd(document.activeElement);
+    event.preventDefault();
+    // document.activeElement. = this.innerHTML.length;
   }
 });
 
