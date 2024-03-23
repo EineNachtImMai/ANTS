@@ -1,0 +1,29 @@
+@font-face {
+  font-family: 'JetBrains Mono Nerd Font';
+  src: url('../fonts/JetBrainsMono/JetBrainsMonoNerdFont-Regular.ttf') format('truetype'),
+  /* Add additional font weights and styles if needed */
+}
+
+* {
+  font-family: 'JetBrains Mono Nerd Font';
+  font-size: 14px;
+
+  background-color: rgba(30, 30, 46, 1.0);
+  /* user-css: https://mshaugh.github.io/nerdfont-webfonts/build/firacode-nerd-font.css; */
+}
+
+button {
+  border-radius: 16px;
+  border-color: rgba(0, 0, 0, 1.0) rgba(0, 0, 0, 1.0);
+  border-style: solid;
+}
+
+textarea {
+  border: 0px;
+  width: 100%;
+  resize: none;
+}
+
+textarea:hover {
+  background-color: rgba(35, 35, 52, 1.0)
+}

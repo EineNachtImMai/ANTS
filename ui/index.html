@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css" />
     <title>Simple Text Editor</title>
+    <!-- <script src="font.js"></script> -->
 </head>
 <body>
-    <textarea id="editor" rows="20" cols="130"></textarea>
     <input type="file" id="fileInput">
     <button id="openButton">Open File</button>
+
+    <textarea id="editor" rows="20" cols="130"></textarea>
 
     <script>
         const editor = document.getElementById('editor');
@@ -31,10 +33,6 @@
 
             reader.readAsText(file);
         });
-        
-        editor.addEventListener('change', (event) => {
-            
-    });
     </script>
 </body>
 </html>

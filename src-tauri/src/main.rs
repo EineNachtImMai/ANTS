@@ -30,12 +30,6 @@ fn read(path: &str) -> Result<String, Error> {
 }
 
 fn main() {
-    let _ = write("/home/blackstar/Documents/programming/rust/project_ant/learn_tauri/files/something.txt", "something something pineapple idk");
-    println!(
-        "{}",
-        read("/home/blackstar/Documents/programming/rust/project_ant/learn_tauri/files/something.txt")
-            .expect("this code is held together by hot glue and tape")
-    );
     tauri::Builder::default()
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
