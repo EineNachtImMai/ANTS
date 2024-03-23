@@ -13,6 +13,10 @@
   /* user-css: https://mshaugh.github.io/nerdfont-webfonts/build/firacode-nerd-font.css; */
 }
 
+:focus {
+  outline: 0;
+}
+
 input[type="file"] {
   display: none;
 }
@@ -32,14 +36,15 @@ button {
 /*   resize: none; */
 /* } */
 
+p[contenteditable="true"] {
+  height: auto;
+  overflow: auto;
+  border-radius: 10x;
+  background-color: rgba(35, 35, 52, 1.0);
+  margin: 2px;
+}
+
 p[contenteditable="true"]:hover {
-  background-color: rgba(35, 35, 52, 1.0)
+  background-color: rgba(40, 40, 60, 1.0)
 }
 
-p[contenteditable="true"]:focus {
-  background-color: rgba(35, 35, 52, 1.0)
-}
-
-:focus {
-  outline: 0;
-}
