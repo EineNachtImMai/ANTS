@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <title>Simple Text Editor</title>
+</head>
+<body>
+    <textarea id="editor" rows="20" cols="130"></textarea>
+    <input type="file" id="fileInput">
+    <button id="openButton">Open File</button>
+
+    <script>
+        const editor = document.getElementById('editor');
+        const fileInput = document.getElementById('fileInput');
+        const openButton = document.getElementById('openButton');
+
+        openButton.addEventListener('click', () => {
+          fileInput.click();
+        });
+
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            
+            reader.onload = () => {
+                const contents = reader.result;
+                editor.value = contents; 
+            };
+
+            reader.readAsText(file);
+        });
+        
+        editor.addEventListener('change', (event) => {
+            
+    });
+    </script>
+</body>
+</html>
+
