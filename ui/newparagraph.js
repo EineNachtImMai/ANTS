@@ -54,7 +54,7 @@ document.addEventListener('keydown', function(event) {
       event.preventDefault();
     }
   }
-  else if (event.key == "Backspace" && document.activeElement.textContent === "") {
+  else if (event.key == "Backspace" && document.activeElement.textContent === "" && document.activeElement.id != "p1") {
     const prev = document.activeElement.previousSibling;
     document.activeElement.remove();
     prev.focus();
