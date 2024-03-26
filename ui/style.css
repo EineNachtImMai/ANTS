@@ -53,3 +53,7 @@ p[contenteditable="true"]:hover {
   background-color: rgba(40, 40, 60, 1.0)
 }
 
+bold {
+  color: #ff0000;
+  font-weight: 800;
+}

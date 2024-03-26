@@ -27,7 +27,6 @@ function moveCursorToEnd(paragraph) {
 
 document.addEventListener('keydown', function(event) {
     if (event.shiftKey && event.key === 'Enter') {
-        paragraphCounter++;
 
         const newParagraph = document.createElement('p');
 
@@ -44,7 +43,8 @@ document.addEventListener('keydown', function(event) {
         const selection = window.getSelection();
         selection.removeAllRanges();
         selection.addRange(range);
-
+        
+        paragraphCounter++;
         event.preventDefault();
     }
   else if (event.key === 'Enter') {
