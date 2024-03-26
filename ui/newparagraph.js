@@ -70,7 +70,7 @@ const butt = document.getElementById("openButton");
 
 butt.addEventListener('click', () => {
   // Open a selection dialog for image files
-  console.log("test"); // testing purposes as usual
+  // console.log("test"); // testing purposes as usual
   const selected = open({
     multiple: false,
     filters: [{
