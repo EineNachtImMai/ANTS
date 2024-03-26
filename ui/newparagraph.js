@@ -1,19 +1,25 @@
 // Initialize a counter to keep track of the number of paragraphs created
 let paragraphCounter = 2;
 
+// Imports
+const { open } = window.__TAURI__.dialog;
+const { readTextFile } = window.__TAURI__.fs;
+
+// constants refering to the elements of our UI
+const butt = document.getElementById("openButton");
 const container = document.getElementById("paragraphs");
 const editor = document.getElementById('p1');
 
-// Place the cursor at the end of the paragraph
+
+// Variable storing the path of the currently open file
+let currentlyOpenPath = null;
+
 function moveCursorToEnd(paragraph) {
-    // Create a new Range object
     const range = document.createRange();
     
-    // Set the range to the end of the paragraph
     range.selectNodeContents(paragraph);
     range.collapse(false); // Collapse the range to the end
     
-    // Create a new Selection object and set the range
     const selection = window.getSelection();
     selection.removeAllRanges(); // Clear any existing selection
     selection.addRange(range); // Set the new range
@@ -64,11 +70,7 @@ document.addEventListener('keydown', function(event) {
   }
 });
 
-let currentlyOpen = null;
 
-const { open } = window.__TAURI__.dialog;
-const { readTextFile } = window.__TAURI__.fs;
-const butt = document.getElementById("openButton");
 
 butt.addEventListener('click', () => {
   // Open a selection dialog for image files
@@ -77,7 +79,14 @@ butt.addEventListener('click', () => {
     multiple: false,
     filters: [{
       name: 'Text',
-      extensions: ['txt', 'ant']
+      extensions: ['txt', 'antmd']
     }]
-  }).then((result) => {currentlyOpen = result; console.log(currentlyOpen)});
+  })
+  .then((result) => {
+    currentlyOpenPath = result;
+    // console.log(currentlyOpenPath)
+  })
+  .catch((e) => {
+    throw new Error(e)
+  });
 });

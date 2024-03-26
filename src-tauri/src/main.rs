@@ -12,10 +12,16 @@
 //                     /      |               ^
 //                    ^       |
 // Stef                       ^
+//
+// I am neither the creator nor the owner of this ASCII art, Stef is. The site I found it on seemed
+// to allow the usage of the artworks as long as you leave the signature (which I did) but if you
+// are the owner and would like it removed, feel free to contact me.
 
 
 // number of times my PC crashed in the development process (without counting the initial few days,
 // otherwise i'd have like 20 more)
+//
+// crash_counter = 2
 
 
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
@@ -24,17 +30,6 @@
 use std::fs::{File, OpenOptions};
 use std::io::{Write, BufReader, BufRead, Error};
 
-// #[tauri::command]
-// async fn open_file_dialog() -> Option<String> {
-//     match tauri::FileDialog::new()
-//         .add_filter("All Files", "*")
-//         .pick_file()
-//         .await
-//     {
-//         Ok(Some(file)) => Some(file.path().to_string_lossy().to_string()),
-//         _ => None,
-//     }
-// }
 
 #[tauri::command]
 fn write(path: &str, contents: &str) -> Result<(), Error> {
