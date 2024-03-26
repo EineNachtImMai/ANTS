@@ -2,6 +2,8 @@
 let paragraphCounter = 2;
 
 const container = document.getElementById("paragraphs");
+const editor = document.getElementById('p1');
+const fileInput = document.getElementById('fileInput');
 
 // Place the cursor at the end of the paragraph
 function moveCursorToEnd(paragraph) {
@@ -60,25 +62,17 @@ document.addEventListener('keydown', function(event) {
     prev.focus();
     moveCursorToEnd(document.activeElement);
     event.preventDefault();
-    // document.activeElement. = this.innerHTML.length;
   }
 });
 
-const editor = document.getElementById('p1');
-const fileInput = document.getElementById('fileInput');
-const openButton = document.getElementById('openButton');
-
-openButton.addEventListener('click', () => {
-  fileInput.click();
-});
 
 fileInput.addEventListener('change', (event) => {
   const file = event.target.files[0];
   const reader = new FileReader();
-            
+
   reader.onload = () => {
     const contents = reader.result;
-    editor.value = contents; 
+    editor.value = contents;
   };
   reader.readAsText(file);
 });

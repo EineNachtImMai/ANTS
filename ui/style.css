@@ -17,13 +17,18 @@
   outline: 0;
 }
 
-input[type="file"] {
-  display: none;
+input[type="file"]::file-selector-button {
+  color: #cdd6f4;
+  background-color: #313244;
+  border-radius: 16px;
+  border-color: #11111b;
+  border-style: solid;
+  /* margin: 10px; */
 }
 
 button {
   border-radius: 16px;
-  border-color: rgba(0, 0, 0, 1.0) rgba(0, 0, 0, 1.0);
+  border-color: #11111b;
   border-style: solid;
   margin: 10px;
 }

@@ -1,10 +1,26 @@
+//               ,
+//       _,-'\   /|   .    .    /`.
+//   _,-'     \_/_|_  |\   |`. /   `._,--===--.__
+//  ^       _/"/  " \ : \__|_ /.   ,'    :.  :. .`-._
+//         // ^   /7 t'""    "`-._/ ,'\   :   :  :  .`.
+//         Y      L/ )\         ]],'   \  :   :  :   : `.
+//         |        /  `.n_n_n,','\_    \ ;   ;  ;   ;  _>
+//         |__    ,'     |  \`-'    `-.__\_______.==---'
+//        //  `""\\      |   \            \
+//        \|     |/      /    \            \
+//                      /     |             `.
+//                     /      |               ^
+//                    ^       |
+// Stef                       ^
+
+
+
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use std::fs::{File, OpenOptions};
 use std::io::{Write, BufReader, BufRead, Error};
 
-// use serde_json::Result;
 
 #[tauri::command]
 fn write(path: &str, contents: &str) -> Result<(), Error> {
