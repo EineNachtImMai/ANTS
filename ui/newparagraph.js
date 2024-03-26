@@ -64,8 +64,10 @@ document.addEventListener('keydown', function(event) {
   }
 });
 
+let currentlyOpen = null;
 
 const { open } = window.__TAURI__.dialog;
+const { readTextFile } = window.__TAURI__.fs;
 const butt = document.getElementById("openButton");
 
 butt.addEventListener('click', () => {
@@ -77,7 +79,5 @@ butt.addEventListener('click', () => {
       name: 'Text',
       extensions: ['txt', 'ant']
     }]
-  });
-
-  editor.innerText = selected.value;
+  }).then((result) => {currentlyOpen = result; console.log(currentlyOpen)});
 });
