@@ -14,6 +14,9 @@
 // Stef                       ^
 
 
+// number of times my PC crashed in the development process (without counting the initial few days,
+// otherwise i'd have like 20 more)
+
 
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
@@ -21,6 +24,17 @@
 use std::fs::{File, OpenOptions};
 use std::io::{Write, BufReader, BufRead, Error};
 
+// #[tauri::command]
+// async fn open_file_dialog() -> Option<String> {
+//     match tauri::FileDialog::new()
+//         .add_filter("All Files", "*")
+//         .pick_file()
+//         .await
+//     {
+//         Ok(Some(file)) => Some(file.path().to_string_lossy().to_string()),
+//         _ => None,
+//     }
+// }
 
 #[tauri::command]
 fn write(path: &str, contents: &str) -> Result<(), Error> {

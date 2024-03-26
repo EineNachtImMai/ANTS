@@ -3,7 +3,6 @@ let paragraphCounter = 2;
 
 const container = document.getElementById("paragraphs");
 const editor = document.getElementById('p1');
-const fileInput = document.getElementById('fileInput');
 
 // Place the cursor at the end of the paragraph
 function moveCursorToEnd(paragraph) {
@@ -66,13 +65,19 @@ document.addEventListener('keydown', function(event) {
 });
 
 
-fileInput.addEventListener('change', (event) => {
-  const file = event.target.files[0];
-  const reader = new FileReader();
+const { open } = window.__TAURI__.dialog;
+const butt = document.getElementById("openButton");
 
-  reader.onload = () => {
-    const contents = reader.result;
-    editor.value = contents;
-  };
-  reader.readAsText(file);
+butt.addEventListener('click', () => {
+  // Open a selection dialog for image files
+  console.log("test"); // testing purposes as usual
+  const selected = open({
+    multiple: false,
+    filters: [{
+      name: 'Text',
+      extensions: ['txt', 'ant']
+    }]
+  });
+
+  editor.innerText = selected.value;
 });
