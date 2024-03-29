@@ -80,7 +80,8 @@ document.addEventListener('keydown', function(event) {
     .then((response) => {
         currentSavePath = response;
         currentlyOpenPath = response;
-        invoke('write', {path: currentSavePath, contents: editor.innerHTML, append: false})
+        invoke('write', {path: currentSavePath, contents: editor.innerText, append: false});
+        // console.log(editor.innerText, currentSavePath)
       })
     .catch((e) => {
         throw new Error(e)

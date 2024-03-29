@@ -33,7 +33,7 @@ use std::io::{Write, BufReader, BufRead, Error};
 
 fn write_to_result(path: &str, contents: &str, append: bool) -> Result<(), Error> {
     let mut output = OpenOptions::new().write(true).append(append).create(true).open(path).unwrap();
-    // writeln!(output, "{contents}").expect("oopsie woopsie");
+    writeln!(output, "{contents}").expect("oopsie woopsie");
 
     Ok(())
 }
