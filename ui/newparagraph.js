@@ -2,8 +2,9 @@
 let paragraphCounter = 2;
 
 // Imports
-const { open } = window.__TAURI__.dialog;
+const { open, save } = window.__TAURI__.dialog;
 const { readTextFile } = window.__TAURI__.fs;
+const { invoke } = window.__TAURI__.tauri
 
 // constants refering to the elements of our UI
 const butt = document.getElementById("openButton");
@@ -13,6 +14,7 @@ const editor = document.getElementById('p1');
 
 // Variable storing the path of the currently open file
 let currentlyOpenPath = null;
+let currentSavePath = null;
 
 function moveCursorToEnd(paragraph) {
     const range = document.createRange();
@@ -68,6 +70,22 @@ document.addEventListener('keydown', function(event) {
     moveCursorToEnd(document.activeElement);
     event.preventDefault();
   }
+  else if (event.ctrlKey && event.key === "s") {
+    save({
+      filters: [{
+        name: "ANTS file",
+        extensions: ["antmd"]
+      }]
+    })
+    .then((response) => {
+        currentSavePath = response;
+        currentlyOpenPath = response;
+        invoke('write', {path: currentSavePath, contents: editor.innerHTML, append: false})
+      })
+    .catch((e) => {
+        throw new Error(e)
+      });
+  }
 });
 
 
@@ -79,14 +97,21 @@ butt.addEventListener('click', () => {
     multiple: false,
     filters: [{
       name: 'Text',
-      extensions: ['txt', 'antmd']
+      extensions: ['antmd']
     }]
   })
   .then((result) => {
-    currentlyOpenPath = result;
-    // console.log(currentlyOpenPath)
+    if (result) {
+  
+      currentlyOpenPath = result;
+    
+      invoke('read', {path: currentlyOpenPath})
+        .then((response) => {editor.innerHTML = response});
+      // console.log(currentlyOpenPath)
+    }
   })
   .catch((e) => {
     throw new Error(e)
   });
+
 });

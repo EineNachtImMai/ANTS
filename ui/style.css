@@ -41,6 +41,17 @@ button {
 /*   resize: none; */
 /* } */
 
+bold {
+  color: #a6e3a1;
+  font-weight: 800;
+  background-color: transparent;
+}
+
+i {
+  background-color: transparent;
+  font-weight: +50;
+}
+
 p[contenteditable="true"] {
   height: auto;
   overflow: auto;
@@ -51,9 +62,4 @@ p[contenteditable="true"] {
 
 p[contenteditable="true"]:hover {
   background-color: rgba(40, 40, 60, 1.0)
-}
-
-bold {
-  color: #ff0000;
-  font-weight: 800;
 }
