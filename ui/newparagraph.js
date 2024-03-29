@@ -36,16 +36,10 @@ document.addEventListener('keydown', function(event) {
 
         newParagraph.contentEditable = true;
 
-        document.getElementById("paragraphs").appendChild(newParagraph);
+        document.activeElement.after(newParagraph);
 
         newParagraph.focus();
 
-        const range = document.createRange();
-        range.selectNodeContents(newParagraph);
-        const selection = window.getSelection();
-        selection.removeAllRanges();
-        selection.addRange(range);
-        
         paragraphCounter++;
         event.preventDefault();
     }
