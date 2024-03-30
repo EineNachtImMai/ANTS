@@ -10,7 +10,6 @@
   color: #cdd6f4;
 
   background-color: rgba(30, 30, 46, 1.0);
-  /* user-css: https://mshaugh.github.io/nerdfont-webfonts/build/firacode-nerd-font.css; */
 }
 
 :focus {
@@ -33,26 +32,18 @@ button {
   margin: 10px;
 }
 
-/* textarea { */
-/*   border: 0px; */
-/*   width: 100%; */
-/*   height: auto; */
-/*   overflow-y: visible; */
-/*   resize: none; */
-/* } */
-
-bold {
+bold, strong {
   color: #a6e3a1;
   font-weight: 800;
   background-color: transparent;
 }
 
-i {
+i, em {
   background-color: transparent;
   font-weight: +50;
 }
 
-p[contenteditable="true"] {
+p[class="textzone"], p[class="textdisplay"] {
   height: auto;
   overflow: auto;
   border-radius: 10x;
@@ -60,6 +51,6 @@ p[contenteditable="true"] {
   margin: 2px;
 }
 
-p[contenteditable="true"]:hover {
+p[class="textzone"]:hover, p[class="textdisplay"]:hover {
   background-color: rgba(40, 40, 60, 1.0)
 }

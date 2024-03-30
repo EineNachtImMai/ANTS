@@ -9,7 +9,6 @@ const { invoke } = window.__TAURI__.tauri
 // constants refering to the elements of our UI
 const butt = document.getElementById("openButton");
 const container = document.getElementById("paragraphs");
-const editor = document.getElementById('p1');
 
 
 // Variable storing the path of the currently open file
@@ -46,38 +45,38 @@ function contentsToHtml(contents) {
   container.innerHTML = "";
   if (parsedContents.length > 1) {
     for (let i=0; i<parsedContents.length-1; i++) {
-      createNewChild(container, parsedContents[i]);
+      createNewChild(paragraphs, parsedContents[i], false);
     }
-  } else {createNewChild(container, parsedContents[0])};
+  } else {createNewChild(paragraphs, parsedContents[0], false)};
 }
 
-function createNewChild(parent, childcontents) {
+function createNewChild(parent, childcontents, focus) {
+  
+  const newContainer = document.createElement("div");
+  newContainer.id = "container" + paragraphCounter;
+  parent.appendChild(newContainer);
+
   const newChild = document.createElement("p");
-  newChild.id = "p" + paragraphCounter;
+  newChild.id = "editor" + paragraphCounter;
   newChild.contentEditable = true;
   newChild.className = "textzone";
   newChild.innerHTML = childcontents;
-  parent.appendChild(newChild);
+  newContainer.appendChild(newChild);
+
+  const newDisplay = document.createElement("p");
+  newDisplay.id = paragraphCounter;
+  newDisplay.style = "display: none";
+  newContainer.appendChild(newDisplay);
+
+  if (focus) { newChild.focus() };
+
   paragraphCounter++;
 }
 
 document.addEventListener('keydown', function(event) {
     if (event.shiftKey && event.key === 'Enter') {
-
-        const newParagraph = document.createElement('p');
-
-        newParagraph.id = 'p' + paragraphCounter;
-
-        newParagraph.contentEditable = true;
-        
-        newParagraph.className = "textzone";
-
-        document.activeElement.after(newParagraph);
-
-        newParagraph.focus();
-
-        paragraphCounter++;
-        event.preventDefault();
+    createNewChild(container, "", true);
+    event.preventDefault();
     }
   else if (event.key === 'Enter') {
     const focusedElement = document.activeElement;
@@ -183,4 +182,27 @@ butt.addEventListener('click', () => {
     throw new Error(e)
   });
 
+});
+
+function parseMDToHTML(markdown) {
+  // handle the parsing
+  return invoke('convertMDtoHTML', {contents: markdown})
+}
+
+document.addEventListener('click', (event) => {
+  const dad = event.target.closest(".container");
+  Array.from(document.getElementsByClassName("textdisplay")).forEach((element) => {
+    // console.log(parseMDToHTML(document.getElementById("editor" + element.id).innerHTML));
+    parseMDToHTML(document.getElementById("editor" + element.id).innerHTML).then((parsed) => {element.innerHTML = parsed.slice(3, -4)});
+    element.style.display = "block";
+  });
+  Array.from(document.getElementsByClassName("textzone")).forEach((element) => element.style.display = "none");
+  if (dad) {
+    const htmlContent = dad.querySelector('.textdisplay');
+    const editorElement = dad.querySelector('.textzone');
+    
+    editorElement.style.display = 'block';
+    editorElement.focus();
+    htmlContent.style.display = 'none';
+  }
 });

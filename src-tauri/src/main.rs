@@ -21,7 +21,7 @@
 // number of times my PC crashed in the development process (without counting the initial few days,
 // otherwise i'd have like 20 more)
 //
-// crash_counter = 3
+// crash_counter = 5
 
 
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
@@ -29,7 +29,7 @@
 
 use std::fs::{File, OpenOptions};
 use std::io::{Write, BufReader, BufRead, Error};
-
+use markdown::{to_html_with_options, CompileOptions, Options};
 
 fn write_to_result(path: &str, contents: &str, append: bool) -> Result<(), Error> {
     let mut output = OpenOptions::new().write(true).append(append).create(true).open(path).unwrap();
@@ -64,9 +64,23 @@ fn read(path: &str) -> String {
     result
 }
 
+#[tauri::command]
+fn convertMDtoHTML(contents: &str) -> String {
+    to_html_with_options(
+        contents,
+        &Options {
+            compile: CompileOptions {
+                allow_dangerous_html: true,
+                ..CompileOptions::default()
+            },
+            ..Options::default()
+        }
+    ).expect("we fucked up")
+}
+
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![read, write])
+        .invoke_handler(tauri::generate_handler![read, write, convertMDtoHTML])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
