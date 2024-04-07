@@ -54,6 +54,7 @@ function createNewChild(parent, childcontents, focus) {
   
   const newContainer = document.createElement("div");
   newContainer.id = "container" + paragraphCounter;
+  newContainer.className = "container";
   parent.appendChild(newContainer);
 
   const newChild = document.createElement("p");
@@ -66,6 +67,7 @@ function createNewChild(parent, childcontents, focus) {
   const newDisplay = document.createElement("p");
   newDisplay.id = paragraphCounter;
   newDisplay.style = "display: none";
+  newDisplay.className = "textdisplay";
   newContainer.appendChild(newDisplay);
 
   if (focus) { newChild.focus() };
@@ -83,20 +85,22 @@ document.addEventListener('keydown', function(event) {
     if (focusedElement && focusedElement.tagName === 'P' && focusedElement.getAttribute('contenteditable') === 'true') {
       const selection = window.getSelection();
       const range = selection.getRangeAt(0);
-      const br = document.createElement('br');
       range.deleteContents();
-      range.insertNode(br);
+      range.insertNode( document.createTextNode("\n") );
+      range.insertNode(document.createElement('br'));
+      // range.insertNode(document.createElement('br'));
       range.collapse(false);
       selection.removeAllRanges();
       selection.addRange(range);
       event.preventDefault();
     }
   }
-  else if (event.key == "Backspace" && document.activeElement.textContent === "" && document.activeElement.id != "p1") {
-    const prev = document.activeElement.previousSibling;
-    document.activeElement.remove();
+  else if (event.key == "Backspace" && document.activeElement.textContent === "" && document.activeElement.id != "editor1") {
+    const dad = document.activeElement.parentNode;
+    const prev = dad.previousElementSibling.getElementsByClassName("textzone")[0];
+    dad.remove();
     prev.focus();
-    moveCursorToEnd(document.activeElement);
+    moveCursorToEnd(prev);
     event.preventDefault();
   }
   else if (event.ctrlKey && event.shiftKey && event.key === "S") {
@@ -191,9 +195,12 @@ function parseMDToHTML(markdown) {
 
 document.addEventListener('click', (event) => {
   const dad = event.target.closest(".container");
+  // console.log(Array.from(document.getElementsByClassName("textdisplay")));
   Array.from(document.getElementsByClassName("textdisplay")).forEach((element) => {
     // console.log(parseMDToHTML(document.getElementById("editor" + element.id).innerHTML));
-    parseMDToHTML(document.getElementById("editor" + element.id).innerHTML).then((parsed) => {element.innerHTML = parsed.slice(3, -4)});
+    // console.log(element);
+    parseMDToHTML(document.getElementById("editor" + element.id).innerText).then((parsed) => {element.innerHTML = parsed.replace(/(<p[^>]+?>|<p>|<\/p>)/img, "")});
+    window.MathJax.Queue(['Typeset', MathJax, element.id])
     element.style.display = "block";
   });
   Array.from(document.getElementsByClassName("textzone")).forEach((element) => element.style.display = "none");
@@ -206,3 +213,13 @@ document.addEventListener('click', (event) => {
     htmlContent.style.display = 'none';
   }
 });
+
+
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
