@@ -1,6 +1,8 @@
 // Initialize a counter to keep track of the number of paragraphs created
 let paragraphCounter = 2;
 
+// just a useless comment
+
 // Imports
 const { open, save } = window.__TAURI__.dialog;
 const { readTextFile } = window.__TAURI__.fs;
