@@ -1,3 +1,6 @@
+/* the main styling interface 
+ I'll probably get to making a config somwhere in the future*/
+
 @font-face {
   font-family: 'JetBrains Mono Nerd Font';
   src: url('../fonts/JetBrainsMono/JetBrainsMonoNerdFont-Regular.ttf') format('truetype'),
