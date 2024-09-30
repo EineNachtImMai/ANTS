@@ -8,7 +8,7 @@ It is currently in the (very) early stages of development, but here are *some* o
 - LaTeX syntax integration
 - SMILES syntax interpretion for chem, and a way to integrate different molecular representations (namely Cram, Lewis, Newman and Fischer) *(sadly, I still have no idea how to do that)*
 - native PDF annotation (source: my teachers give us PDFs to fill and doing it on PC would be cool)
-- a way to make quick sketches
+- a way to make quick sketches (the current plan is to have some kind of integration for ExcaliDraw)
 
 ## How to run
 
