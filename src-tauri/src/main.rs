@@ -60,7 +60,7 @@ fn read_to_result(path: &str) -> Result<String, Error> {
 
 #[tauri::command]
 fn read(path: &str) -> String {
-    let result = read_to_result(path).expect("well, shit");
+    let result = read_to_result(path).expect("faliure to read, make sure the provided path is correct and the file exists.");
     result
 }
 
